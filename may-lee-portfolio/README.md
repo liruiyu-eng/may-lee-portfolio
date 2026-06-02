@@ -34,3 +34,9 @@
 ## 本地预览
 
 直接用浏览器打开 `index.html` 即可预览网站。
+
+## Netlify 部署注意
+
+- 发布目录应选择 `may-lee-portfolio` 文件夹本身。
+- 确认线上文件包含 `index.html`、`css/style.css` 和所有页面文件。
+- 不要用 TextEdit 打开后保存 HTML 文件，容易被改写成 Cocoa HTML，导致样式丢失。
