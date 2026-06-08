@@ -318,6 +318,160 @@
         
         // 启动全新的流体引擎
         updateFluidGlow();
+                /* ------------------------------------
+         4. 蓝色墨水鼠标拖尾
+        ------------------------------------ */
+        (() => {
+            const canvas = document.getElementById('fluid-cursor');
+            const ctx = canvas.getContext('2d');
+
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            let dpr = window.devicePixelRatio || 1;
+
+            let cursor = {
+                x: width / 2,
+                y: height / 2,
+                px: width / 2,
+                py: height / 2,
+                active: false,
+                hover: false
+            };
+
+            const particles = [];
+
+            function resizeCursorCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                dpr = window.devicePixelRatio || 1;
+
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                canvas.style.width = width + 'px';
+                canvas.style.height = height + 'px';
+
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+
+            function addCursorParticle(x, y, vx, vy) {
+                const speed = Math.hypot(vx, vy);
+                const count = Math.min(5, Math.max(1, Math.floor(speed / 14)));
+
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: x + (Math.random() - 0.5) * 10,
+                        y: y + (Math.random() - 0.5) * 10,
+                        vx: -vx * 0.018 + (Math.random() - 0.5) * 1.4,
+                        vy: -vy * 0.018 + (Math.random() - 0.5) * 1.4,
+                        r: cursor.hover
+                            ? 24 + Math.random() * 20
+                            : 14 + Math.random() * 22,
+                        life: 1,
+                        decay: 0.018 + Math.random() * 0.018,
+                        blur: 10 + Math.random() * 18
+                    });
+                }
+            }
+
+            function drawCursorParticle(p) {
+                const gradient = ctx.createRadialGradient(
+                    p.x,
+                    p.y,
+                    0,
+                    p.x,
+                    p.y,
+                    p.r
+                );
+
+                gradient.addColorStop(0, `rgba(37, 99, 235, ${0.42 * p.life})`);
+                gradient.addColorStop(0.45, `rgba(59, 130, 246, ${0.22 * p.life})`);
+                gradient.addColorStop(1, `rgba(59, 130, 246, 0)`);
+
+                ctx.save();
+                ctx.filter = `blur(${p.blur}px)`;
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function drawCursorDot() {
+                if (!cursor.active) return;
+
+                ctx.save();
+
+                ctx.filter = 'blur(0.8px)';
+                ctx.fillStyle = cursor.hover
+                    ? 'rgba(37, 99, 235, 0.95)'
+                    : 'rgba(37, 99, 235, 0.85)';
+
+                ctx.beginPath();
+                ctx.arc(cursor.x, cursor.y, cursor.hover ? 6 : 4, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.strokeStyle = 'rgba(37, 99, 235, 0.22)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(cursor.x, cursor.y, cursor.hover ? 26 : 18, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.restore();
+            }
+
+            function animateCursorTrail() {
+                ctx.clearRect(0, 0, width, height);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vx *= 0.985;
+                    p.vy *= 0.985;
+                    p.r *= 1.012;
+                    p.life -= p.decay;
+
+                    if (p.life <= 0) {
+                        particles.splice(i, 1);
+                    } else {
+                        drawCursorParticle(p);
+                    }
+                }
+
+                drawCursorDot();
+                requestAnimationFrame(animateCursorTrail);
+            }
+
+            window.addEventListener('mousemove', (e) => {
+                cursor.active = true;
+
+                cursor.px = cursor.x;
+                cursor.py = cursor.y;
+                cursor.x = e.clientX;
+                cursor.y = e.clientY;
+
+                const vx = cursor.x - cursor.px;
+                const vy = cursor.y - cursor.py;
+
+                addCursorParticle(cursor.x, cursor.y, vx, vy);
+            });
+
+            window.addEventListener('mouseover', (e) => {
+                cursor.hover = Boolean(
+                    e.target.closest('a, button, [role="button"], .cursor-hover')
+                );
+            });
+
+            window.addEventListener('mouseout', () => {
+                cursor.hover = false;
+            });
+
+            window.addEventListener('resize', resizeCursorCanvas);
+
+            resizeCursorCanvas();
+            animateCursorTrail();
+        })();
     </script>
 </body>
 </html>
