@@ -9,34 +9,31 @@
 <body data-active="home">
 <header class="site-header">
   <nav class="nav container" aria-label="Main navigation">
-    <a class="brand" href="./index.html" aria-label="May Lee 首页"><img src="./assets/wordmark-white.svg" alt="May Lee"><span data-zh="李梅" data-en="May Lee">李梅</span></a>
+    <a class="brand" href="./index.html" aria-label="May Lee 关于我"><img src="./assets/wordmark-white.svg" alt="May Lee"><span data-zh="李梅" data-en="May Lee">李梅</span></a>
     <button class="nav-toggle" type="button" aria-label="Open menu">MENU</button>
     <div class="nav-links">
-      <a href="./index.html" data-nav="home" data-zh="首页" data-en="Home">首页</a>
-      <a href="./projects.html" data-nav="projects" data-zh="项目" data-en="Projects">项目</a>
+      <a href="./index.html" data-nav="home" data-zh="关于我" data-en="About">关于我</a>
+      <a href="./projects.html" data-nav="projects" data-zh="精选项目" data-en="Selected Projects">精选项目</a>
       <a href="./articles.html" data-nav="ai" data-zh="AI Builder" data-en="AI Builder">AI Builder</a>
-      <a href="./about.html" data-nav="about" data-zh="关于我" data-en="About">关于我</a>
       <button class="lang-toggle" type="button" aria-label="Switch language">EN</button>
-      <a class="nav-cta" href="mailto:mei_lee@126.com" data-zh="联系我" data-en="Contact">联系我</a>
     </div>
   </nav>
 </header>
 <main>
   <section class="hero hero-home">
-    <div class="doodle doodle-left" aria-hidden="true">⌄<br>⌄<br>⌄</div>
+    <div class="doodle doodle-left" aria-hidden="true"></div>
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="kicker" data-zh="B2B MARKETING + CUSTOMER EXPERIENCE" data-en="B2B MARKETING + CUSTOMER EXPERIENCE">B2B MARKETING + CUSTOMER EXPERIENCE</p>
-        <h1 data-zh="把复杂业务讲清楚，<br>把增长路径做出来" data-en="Make complex business clear.<br>Turn growth paths into action.">把复杂业务讲清楚，<br>把增长路径做出来</h1>
-        <p class="hero-sub" data-zh="李梅 May Lee｜B端市场营销与客户体验策略专家，关注 AI、产业数字化与增长转化。" data-en="Li Mei / May Lee｜B2B marketing and customer experience strategist focused on AI, industrial digitalization and growth conversion.">李梅 May Lee｜B端市场营销与客户体验策略专家，关注 AI、产业数字化与增长转化。</p>
+        <h1 data-zh="在复杂业务场景里，<br>连接研究、内容与增长" data-en="Connect research, content and growth<br>in complex business scenarios.">在复杂业务场景里，<br>连接研究、内容与增长</h1>
+        <p class="hero-sub" data-zh="李梅 May Lee｜B端市场营销、客户体验与AI场景落地。" data-en="Li Mei / May Lee｜B2B marketing, customer experience and AI workflow builder.">李梅 May Lee｜B端市场营销、客户体验与AI场景落地。</p>
         <div class="button-row">
-          <a class="btn coral" href="./projects.html" data-zh="查看项目" data-en="View Projects">查看项目</a>
-          <a class="btn ghost" href="./assets/resume.pptx" data-zh="下载简历" data-en="Download Resume">下载简历</a>
+          <button class="btn coral contact-trigger" type="button" data-open-contact data-zh="联系我" data-en="Contact Me">联系我</button>
         </div>
       </div>
       <div class="hero-portrait organic-portrait"><img src="./assets/avatar-full.png" alt="李梅 May Lee"></div>
     </div>
-    <div class="doodle doodle-right" aria-hidden="true">⌄⌄⌄<br>⌄⌄⌄<br>⌄⌄⌄</div>
+    <div class="doodle doodle-right" aria-hidden="true"></div>
   </section>
 
   <section class="section intro-section">
@@ -89,6 +86,17 @@
   </div>
   <div class="copyright">© 2026 May Lee. All rights reserved.</div>
 </footer>
+
+<div class="contact-modal" id="contactModal" aria-hidden="true">
+  <div class="contact-backdrop" data-close-contact></div>
+  <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+    <button class="contact-close" type="button" data-close-contact aria-label="关闭">×</button>
+    <p class="kicker dark" data-zh="CONTACT" data-en="CONTACT">CONTACT</p>
+    <h2 id="contactTitle" data-zh="联系李梅" data-en="Contact May Lee">联系李梅</h2>
+    <p><strong data-zh="电话 / 微信" data-en="Phone / WeChat">电话 / 微信</strong><br><a href="tel:15915917840">159-1591-7840</a></p>
+    <p><strong data-zh="邮箱" data-en="Email">邮箱</strong><br><a href="mailto:mei_lee@126.com">mei_lee@126.com</a></p>
+  </div>
+</div>
 <script src="./js/main.js"></script>
 </body>
 </html>

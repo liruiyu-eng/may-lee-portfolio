@@ -1,32 +1,41 @@
 # May Lee Portfolio
 
-静态个人网站，已按最新要求调整：
+本版调整内容：
 
-- 支持中英文切换，语言状态保存在浏览器 localStorage。
-- 删除页面内所有功能性 icon，只保留参考风格里的波浪、色块和手绘装饰符号。
-- 首页改为「工作经历」模块，含 5 家公司经历与文本 logo 样式卡片。
-- 移动端已重新适配：导航折叠、单列卡片、按钮宽度、头像高度均已调整。
-- AI Builder 页面改为「SME企业参展Skill」+「我的自媒体内容」。
+- 第一屏按参考图重做：深蓝首屏、白色波浪底边、底部留白、不规则手绘圆点/小对勾。
+- slogan 改为：在复杂业务场景里，连接研究、内容与增长。
+- 删除右上角「联系我」。
+- 首页导航改为「关于我」，并删除单独「关于我」tab；原关于我内容已整合到首页。
+- 「项目」tab 改为「精选项目」。
+- 首页按钮改为「联系我」，点击弹窗显示电话和邮箱。
+- 删除「下载简历」按钮。
+- 保留中英文切换。
+- 保留移动端适配。
 
-## 部署
+部署说明：
 
-Netlify Publish directory 请保持：
+如果 GitHub 仓库结构是：
 
-```text
+```
+仓库根目录/
+└── may-lee-portfolio/
+    ├── index.html
+    ├── projects.html
+    ├── articles.html
+    ├── about.html
+    ├── css/
+    ├── js/
+    └── assets/
+```
+
+Netlify 的 Publish directory 填：
+
+```
 may-lee-portfolio
 ```
 
-如果你把文件都放到了仓库根目录，则 Publish directory 改为：
+如果把 `index.html` 等文件直接放在仓库根目录，Publish directory 填：
 
-```text
+```
 .
 ```
-
-## 需要替换的素材
-
-当前附件中未包含「与外国人沟通照片」和「坐着办公照片」，因此我保留了两个同名占位文件：
-
-- `assets/project-communication.jpg`：替换为「我与外国人沟通」照片
-- `assets/ai-office.jpg`：替换为「坐着办公」照片
-
-替换时文件名保持不变，GitHub commit 后 Netlify 会自动更新。
