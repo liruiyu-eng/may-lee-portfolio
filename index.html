@@ -3,66 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>更懂用户，才能把增长跑出来 | 个人主页</title>
+    <title>更懂用户，才能把增长跑出来 | May 个人主页</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
     
     <style>
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans CJK SC", sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow-x: hidden;
             background-color: #FCFCFC;
         }
         
-        /* 鼠标跟随流体：强制最顶层并开启硬件加速 */
-        #cursor-blob {
+        /* 强制全屏 Canvas 置顶穿透 */
+        #fluid-canvas {
             position: fixed;
             top: 0;
             left: 0;
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(147, 197, 253, 0.45) 0%, rgba(165, 180, 252, 0.1) 50%, rgba(255, 255, 255, 0) 70%);
-            border-radius: 50%;
-            pointer-events: none; /* 允许鼠标事件穿透 */
-            z-index: 9999;        /* 置于所有图层的最上方 */
-            filter: blur(40px);
-            will-change: transform;
-            transform: translate3d(-999px, -999px, 0);
-            display: block !important; /* 避免被隐藏 */
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: multiply; /* 让蓝紫色流体完美融合在白底上 */
         }
 
-        /* 圆形导航基础架构 */
         .nav-circle-container {
             position: relative;
-            width: 420px;
-            height: 420px;
+            width: 440px;
+            height: 440px;
         }
         
-        /* 圆圈旋转动画 */
+        /* 圆圈自转动画：极其丝滑平稳 */
         .rotating-text {
             position: absolute;
             width: 100%;
             height: 100%;
-            animation: rotateCircle 30s linear infinite;
+            animation: rotateCircle 35s linear infinite;
+            transform-origin: center;
         }
         @keyframes rotateCircle {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
+        /* 手写体特殊样式 */
+        .handwritten-font {
+            font-family: 'Ma Shan Zheng', cursive, sans-serif;
+        }
     </style>
 </head>
 <body class="text-[#1A1A1A] antialiased selection:bg-gray-200">
 
-    <div id="cursor-blob"></div>
+    <canvas id="fluid-canvas"></canvas>
 
-    <nav class="fixed top-0 left-0 right-0 bg-[#FCFCFC]/80 backdrop-blur-md z-50 border-b border-gray-100">
+    <nav class="fixed top-0 left-0 right-0 bg-[#FCFCFC]/70 backdrop-blur-md z-50 border-b border-gray-100">
         <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="text-lg font-medium tracking-tight hover:opacity-70 transition-opacity">May .</a>
             <div class="flex items-center space-x-8 text-sm font-medium text-gray-600">
-                <a href="index.html" class="text-[#1A1A1A] hover:opacity-100 transition-opacity">关于我</a>
+                <a href="#about" class="text-[#1A1A1A] hover:opacity-100 transition-opacity">关于我</a>
                 <a href="#" class="hover:text-[#1A1A1A] transition-colors">精选项目</a>
                 <a href="#" class="hover:text-[#1A1A1A] transition-colors">AI Builder</a>
                 <a href="#" class="inline-flex items-center justify-center px-4 py-2 bg-[#1A1A1A] text-white rounded-full text-xs hover:bg-gray-800 transition-colors">联系我</a>
@@ -72,145 +71,75 @@
 
     <main class="pt-20 relative z-10">
         
-        <section class="max-w-6xl mx-auto px-6 pt-12 pb-24 md:pt-20 md:pb-32 min-h-[85vh] flex items-center">
+        <section class="max-w-6xl mx-auto px-6 pt-12 pb-24 md:pt-20 md:pb-32 min-h-[90vh] flex items-center">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
                 
                 <div class="lg:col-span-7 space-y-6 md:space-y-8">
                     <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">
                         用户驱动 · 体验为本 · 增长可见
                     </span>
-                    <h2 class="text-5xl md:text-7xl font-light tracking-tight text-gray-300">Hello,</h2>
-                    <div class="text-2xl md:text-4xl font-normal leading-relaxed text-gray-700 min-h-[80px]">
-                        我是 May —— <br class="md:hidden"><span id="typed-slogan" class="text-gray-900 font-medium border-b-2 border-gray-100 pb-1"></span>
-                    </div>
-                    <p class="text-base md:text-lg text-gray-400 font-light max-w-md leading-relaxed">
+                    <h1 class="text-4xl md:text-6xl font-light tracking-tight text-gray-900 leading-tight">
+                        更懂用户，<br><span class="font-medium text-blue-600">才能把增长跑出来</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-500 font-light max-w-xl leading-relaxed">
                         帮企业把用户洞察，变成看得见的增长。
                     </p>
                     <div class="pt-4">
                         <a href="#" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#1A1A1A] text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors shadow-sm">
-                            联系我聊聊 →
+                            联系我
                         </a>
                     </div>
                 </div>
 
-                <div class="lg:col-span-5 flex justify-center items-center relative" style="z-index: 20;">
-                    <div class="nav-circle-container" 
-                         onmouseenter="document.getElementById('connect-text').style.display='none'; document.getElementById('go-text').style.display='inline'; document.getElementById('circle-center-text').style.transform='scale(1.1)';" 
-                         onmouseleave="document.getElementById('connect-text').style.display='inline'; document.getElementById('go-text').style.display='none'; document.getElementById('circle-center-text').style.transform='scale(1)';">
+                <div class="lg:col-span-5 flex flex-col justify-center items-center relative">
+                    <div class="nav-circle-container">
+                        <div class="absolute inset-24 bg-gradient-to-tr from-blue-200/40 to-indigo-300/40 rounded-full blur-3xl pointer-events-none"></div>
                         
-                        <div class="absolute inset-24 bg-gradient-to-tr from-blue-200/50 to-indigo-300/40 rounded-full blur-2xl pointer-events-none"></div>
-                        
-                        <svg class="rotating-text" viewBox="0 0 500 500">
+                        <div class="absolute inset-28 rounded-full border border-gray-100 bg-white shadow-sm flex items-center justify-center overflow-hidden pointer-events-none z-0">
+                            <div class="text-gray-300 font-light text-xs tracking-wider">MAY LEE</div>
+                        </div>
+
+                        <svg class="rotating-text z-10 relative" viewBox="0 0 500 500">
                             <defs>
-                                <path id="circlePath" d="M 250, 250 m -160, 0 a 160,160 0 1,1 320,0 a 160,160 0 1,1 -320,0" />
+                                <path id="circlePath" d="M 250, 250 m -165, 0 a 165,165 0 1,1 330,0 a 165,165 0 1,1 -330,0" />
                             </defs>
-                            <text font-size="12" font-family="Inter" font-weight="400" letter-spacing="6">
+                            <text font-size="10" font-family="Inter" font-weight="300" letter-spacing="8">
                                 <textPath xlink:href="#circlePath">
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('ABOUT ME')">ABOUT ME • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('PROJECTS')">PROJECTS • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('AI BUILDER')">AI BUILDER • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('CONTACT')">CONTACT • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('ABOUT ME')">ABOUT ME • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('PROJECTS')">PROJECTS • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('AI BUILDER')">AI BUILDER • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('CONTACT')">CONTACT • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'ABOUT ME')" onmouseleave="handleRingLeave(this)">ABOUT ME • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'PROJECTS')" onmouseleave="handleRingLeave(this)">PROJECTS • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'AI BUILDER')" onmouseleave="handleRingLeave(this)">AI BUILDER • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'CONTACT')" onmouseleave="handleRingLeave(this)">CONTACT • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'ABOUT ME')" onmouseleave="handleRingLeave(this)">ABOUT ME • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'PROJECTS')" onmouseleave="handleRingLeave(this)">PROJECTS • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'AI BUILDER')" onmouseleave="handleRingLeave(this)">AI BUILDER • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'CONTACT')" onmouseleave="handleRingLeave(this)">CONTACT • </tspan>
                                 </textPath>
                             </text>
                         </svg>
 
-                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <span id="circle-center-text" class="text-xs font-semibold tracking-widest text-gray-400 transition-all duration-300" style="color: #9CA3AF;">
-                                <span id="connect-text" style="display: inline;">CONNECT</span>
-                                <span id="go-text" style="display: none; color: #3B82F6;">GO &rarr;</span>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                            <span id="circle-center-text" class="text-[11px] font-semibold tracking-widest text-gray-400 uppercase transition-all duration-300 bg-[#FCFCFC]/80 px-2 py-1 rounded">
+                                CONNECT
                             </span>
                         </div>
+                    </div>
+                    
+                    <div class="mt-6 text-xl text-gray-400 handwritten-font tracking-wide text-center">
+                        连接业务、用户与增长
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <section class="bg-white border-t border-b border-gray-50 py-20 md:py-28 relative z-20">
+        <div id="about" class="bg-white border-t border-b border-gray-50 py-20 md:py-28 relative z-20">
             <div class="max-w-6xl mx-auto px-6">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
                     <div class="lg:col-span-7 space-y-6">
                         <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">ABOUT ME</span>
                         <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-gray-900">深耕科技行业的增长探索者</h2>
-                        <p class="text-base md:text-lg text-gray-600 font-light leading-relaxed">10年用户体验与市场营销经验，深耕科技行业。擅长理解复杂业务与产品，将其转化为清晰的价值主张与可执行的增长路径。</p>
+                        <p class="text-base md:text-lg text-gray-500 font-light leading-relaxed">10年用户体验与市场营销经验，深耕科技行业。擅长理解复杂业务与产品，将其转化为清晰的价值主张与可执行的增长路径。</p>
                     </div>
                     <div class="lg:col-span-5 grid grid-cols-3 gap-4 pt-4 lg:pt-10">
                         <div class="space-y-1">
-                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">10<span class="text-xl font-normal text-gray-400">年</span></div>
-                            <div class="text-xs font-medium text-gray-400 tracking-wider">行业经验</div>
-                        </div>
-                        <div class="space-y-1">
-                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">7<span class="text-xl font-normal text-gray-400">年</span></div>
-                            <div class="text-xs font-medium text-gray-400 tracking-wider">用户研究</div>
-                        </div>
-                        <div class="space-y-1">
-                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">3<span class="text-xl font-normal text-gray-400">年</span></div>
-                            <div class="text-xs font-medium text-gray-400 tracking-wider">市场营销</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-20">
-            <div class="space-y-12">
-                <div class="space-y-2">
-                    <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">EXPERTISE</span>
-                    <h2 class="text-3xl font-medium tracking-tight text-gray-900">核心能力</h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                    <div class="space-y-4 group">
-                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#1A1A1A] group-hover:text-white transition-all duration-300">01</div>
-                        <h3 class="text-xl font-medium text-gray-900">用户研究</h3>
-                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">洞察用户需求与决策路径，为产品与策略提供依据。</p>
-                    </div>
-                    <div class="space-y-4 group">
-                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#1A1A1A] group-hover:text-white transition-all duration-300">02</div>
-                        <h3 class="text-xl font-medium text-gray-900">体验管理</h3>
-                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">设计端到端的客户触点与旅程，提升满意度与转化。</p>
-                    </div>
-                    <div class="space-y-4 group">
-                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#1A1A1A] group-hover:text-white transition-all duration-300">03</div>
-                        <h3 class="text-xl font-medium text-gray-900">B2B营销增长</h3>
-                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">从内容策略到线索转化，构建可持续的增长路径。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <script>
-        // 1. 打字机动态效果
-        var typed = new Typed('#typed-slogan', {
-            strings: [
-                '更懂用户，才能把增长跑出来',
-                '10年用户体验与市场营销专家',
-                '擅长将洞察转化为可执行路径',
-                '用AI把工作做得更深、更快'
-            ],
-            typeSpeed: 60,
-            backSpeed: 35,
-            backDelay: 2500,
-            loop: true,
-            cursorChar: ' |'
-        });
-
-        // 2. 强力修复版：监听窗口级别的鼠标移动
-        const blob = document.getElementById('cursor-blob');
-        
-        window.addEventListener('mousemove', (e) => {
-            // 计算视口绝对坐标，并减去圆半径(225px)使其居中
-            const x = e.clientX - 225;
-            const y = e.clientY - 225;
-            
-            // 使用最高性能的 translate3d 绕过文档流重绘
-            blob.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        });
-    </script>
-</body>
-</html>
+                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">
