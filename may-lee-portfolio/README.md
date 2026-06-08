@@ -1,42 +1,32 @@
 # May Lee Portfolio
 
-一个静态个人作品集网站，使用 HTML + CSS 构建，不依赖任何前端框架。
+静态个人网站，已按最新要求调整：
 
-## 页面
+- 支持中英文切换，语言状态保存在浏览器 localStorage。
+- 删除页面内所有功能性 icon，只保留参考风格里的波浪、色块和手绘装饰符号。
+- 首页改为「工作经历」模块，含 5 家公司经历与文本 logo 样式卡片。
+- 移动端已重新适配：导航折叠、单列卡片、按钮宽度、头像高度均已调整。
+- AI Builder 页面改为「SME企业参展Skill」+「我的自媒体内容」。
 
-- `index.html`：首页，包含个人定位、简介、核心能力、精选项目、AI Builder 和联系方式。
-- `projects.html`：项目页，展示用户研究产品创新、客户体验指标管理、B2B 营销转化三类项目。
-- `articles.html`：AI Builder 页面，展示阿友顺达中亚物流展会项目和“靠谱七粒聊AI”短视频账号作品入口。
-- `about.html`：关于我页面，包含个人简介、求职方向、简历下载、邮箱和微信二维码位置。
+## 部署
 
-## 样式
+Netlify Publish directory 请保持：
 
-主样式文件位于 `css/style.css`。
+```text
+may-lee-portfolio
+```
 
-配色：
+如果你把文件都放到了仓库根目录，则 Publish directory 改为：
 
-- 背景色：`#F7F4EF`
-- 内容底色：`#FFFFFF`
-- 主文字：`#1F2933`
-- 辅助文字：`#6B7280`
-- 强调蓝：`#2563EB`
-- 线条灰：`#E5E7EB`
+```text
+.
+```
 
-## 素材替换
+## 需要替换的素材
 
-请将以下文件替换为真实素材：
+当前附件中未包含「与外国人沟通照片」和「坐着办公照片」，因此我保留了两个同名占位文件：
 
-- `assets/resume.pdf`：个人简历 PDF
-- `assets/wechat-qr.png`：微信二维码
-- `assets/avatar.jpg`：个人头像
-- `assets/project-ayoushunda.jpg`：阿友顺达项目配图
+- `assets/project-communication.jpg`：替换为「我与外国人沟通」照片
+- `assets/ai-office.jpg`：替换为「坐着办公」照片
 
-## 本地预览
-
-直接用浏览器打开 `index.html` 即可预览网站。
-
-## Netlify 部署注意
-
-- 发布目录应选择 `may-lee-portfolio` 文件夹本身。
-- 确认线上文件包含 `index.html`、`css/style.css` 和所有页面文件。
-- 不要用 TextEdit 打开后保存 HTML 文件，容易被改写成 Cocoa HTML，导致样式丢失。
+替换时文件名保持不变，GitHub commit 后 Netlify 会自动更新。

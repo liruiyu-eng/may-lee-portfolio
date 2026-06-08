@@ -6,75 +6,65 @@
   <title>AI Builder｜May Lee</title>
   <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
-  <header class="site-header">
-    <nav class="nav container" aria-label="主导航">
-      <a class="brand" href="./index.html"><span class="brand-mark">ml.</span><span>May Lee<small>Strategy · AI</small></span></a>
-      <div class="nav-links">
-        <a href="./index.html">首页</a>
-        <a href="./projects.html">项目</a>
-        <a class="active" href="./articles.html">AI Builder</a>
-        <a href="./about.html">关于我</a>
-        <a class="nav-cta" href="mailto:limeitongxue@gmail.com">联系我</a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero-navy">
-      <div class="doodles left"><span>⌄</span><span>⌄</span></div>
-      <div class="container hero-grid">
-        <div>
-          <p class="kicker">AI Tools + Workflows</p>
-          <h1 class="hero-title">AI Builder</h1>
-          <p class="hero-sub">把行业经验转化为可执行的 AI 工具与工作流</p>
-          <p class="hero-sub" style="font-size:18px;max-width:680px">我正在构建一系列面向企业决策与增长的 AI 工具，覆盖市场调研、经营分析、供应链风险、金融风控等关键场景，帮助团队更快获取洞察、做出更稳的决策。</p>
-          <div class="button-row"><a class="btn primary" href="mailto:limeitongxue@gmail.com">合作交流</a></div>
-        </div>
-        <div class="hero-photo"><img src="./assets/avatar.jpg" alt="May Lee AI Builder"></div>
-      </div>
-      <div class="doodles right"><span>⌄⌄⌄</span><span>⌄⌄⌄</span></div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-heading"><h2><span class="underline">我正在构建的 AI 工具</span></h2></div>
-        <div class="builder-tools">
-          <article class="tool-card"><div class="round-icon">↗</div><h3>AI经营分析工具</h3><p>自动整合多维经营数据，生成可视化洞察与策略建议，辅助经营决策。</p><a class="text-link" href="#">了解更多 →</a></article>
-          <article class="tool-card"><div class="round-icon">👥</div><h3>AI用户与市场研究工具</h3><p>快速洞察用户需求与市场趋势，生成研究报告与机会点建议。</p><a class="text-link" href="#">了解更多 →</a></article>
-          <article class="tool-card"><div class="round-icon">!</div><h3>AI供应链风险预警工具</h3><p>监测供应链信号，识别潜在风险并预警，支持更稳健的供应链管理。</p><a class="text-link" href="#">了解更多 →</a></article>
-          <article class="tool-card"><div class="round-icon">◎</div><h3>跨境产品市场空白分析工具</h3><p>发现市场空白与蓝海机会，评估进入可行性，降低试错成本。</p><a class="text-link" href="#">了解更多 →</a></article>
-          <article class="tool-card"><div class="round-icon">◇</div><h3>AI金融风控工具</h3><p>评估客户与交易风险，识别异常模式，辅助更精准的风控决策。</p><a class="text-link" href="#">了解更多 →</a></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="method-band">
-      <div class="container">
-        <div class="section-heading"><h2><span class="underline">我的方法</span></h2></div>
-        <div class="method-grid">
-          <article class="method-item"><span class="step">1</span><div class="round-icon">💡</div><div><h3>深入理解业务与行业</h3><p>结合行业经验与问题场景，明确关键痛点与目标。</p></div></article>
-          <article class="method-item"><span class="step">2</span><div class="round-icon">⚙</div><div><h3>设计 AI 方案与工作流</h3><p>选择合适模型与数据，构建可落地的 AI 工具与流程。</p></div></article>
-          <article class="method-item"><span class="step">3</span><div class="round-icon">✓</div><div><h3>测试优化，持续迭代</h3><p>持续验证效果，优化体验，确保工具创造真实价值。</p></div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-wave">
-      <div class="container cta-inner">
-        <div><h2>准备好探索 AI 的可能性了吗？</h2><p>无论是合作共创，还是定制属于你的 AI 解决方案，欢迎与我聊一聊。</p></div>
-        <a class="btn secondary" href="mailto:limeitongxue@gmail.com">联系 May Lee</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div><div class="footer-brand"><span class="brand-mark">ml.</span>May Lee</div><p>Strategy · AI</p></div>
-      <div><h4>快速链接</h4><p><a href="./index.html">首页</a>　<a href="./projects.html">项目</a>　<a href="./articles.html">AI Builder</a>　<a href="./about.html">关于我</a></p></div>
-      <div><h4>保持联系</h4><p>✉ limeitongxue@gmail.com</p><p>📍 中国 · 广州</p></div>
+<body data-active="ai">
+<header class="site-header">
+  <nav class="nav container" aria-label="Main navigation">
+    <a class="brand" href="./index.html" aria-label="May Lee 首页"><img src="./assets/wordmark-white.svg" alt="May Lee"><span data-zh="李梅" data-en="May Lee">李梅</span></a>
+    <button class="nav-toggle" type="button" aria-label="Open menu">MENU</button>
+    <div class="nav-links">
+      <a href="./index.html" data-nav="home" data-zh="首页" data-en="Home">首页</a>
+      <a href="./projects.html" data-nav="projects" data-zh="项目" data-en="Projects">项目</a>
+      <a href="./articles.html" data-nav="ai" data-zh="AI Builder" data-en="AI Builder">AI Builder</a>
+      <a href="./about.html" data-nav="about" data-zh="关于我" data-en="About">关于我</a>
+      <button class="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      <a class="nav-cta" href="mailto:mei_lee@126.com" data-zh="联系我" data-en="Contact">联系我</a>
     </div>
-    <div class="copyright">© 2026 May Lee. All rights reserved.</div>
-  </footer>
+  </nav>
+</header>
+<main>
+  <section class="hero page-hero ai-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <p class="kicker" data-zh="AI TOOLS + WORKFLOWS" data-en="AI TOOLS + WORKFLOWS">AI TOOLS + WORKFLOWS</p>
+        <h1 data-zh="AI Builder" data-en="AI Builder">AI Builder</h1>
+        <p class="hero-sub" data-zh="把行业经验转化为可执行的AI工具与工作流，服务真实业务场景。" data-en="Turning industry experience into executable AI tools and workflows for real business scenarios.">把行业经验转化为可执行的AI工具与工作流，服务真实业务场景。</p>
+        <a class="btn coral" href="mailto:mei_lee@126.com" data-zh="合作交流" data-en="Start a Conversation">合作交流</a>
+      </div>
+      <div class="hero-portrait hero-office-photo"><img src="./assets/ai-office.jpg" alt="办公形象照"></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="kicker dark" data-zh="AI SKILL" data-en="AI SKILL">AI SKILL</p><h2 data-zh="我构建的AI工具" data-en="AI Tool I Built">我构建的AI工具</h2></div>
+      <article class="skill-card no-icons">
+        <div><p class="kicker dark" data-zh="SME企业参展Skill" data-en="SME Exhibition Skill">SME企业参展Skill</p><h3 data-zh="从参展意向到物料产出的标准化AI工作流" data-en="A standardized AI workflow from exhibition intent to marketing deliverables">从参展意向到物料产出的标准化AI工作流</h3><p data-zh="将线下参展流程拆解为展会定位、公司信息收集、物料清单、视觉方向、邀请函、折页、易拉宝、倒计时内容与客户承接路径，支持非专业人员按步骤完成执行。" data-en="Breaks an offline exhibition workflow into positioning, company information collection, material checklist, visual direction, invitations, brochures, roll-up banners, countdown content and lead handoff, so non-specialists can execute step by step.">将线下参展流程拆解为展会定位、公司信息收集、物料清单、视觉方向、邀请函、折页、易拉宝、倒计时内容与客户承接路径，支持非专业人员按步骤完成执行。</p></div>
+        <div class="skill-points"><span data-zh="定位" data-en="Positioning">定位</span><span data-zh="物料" data-en="Materials">物料</span><span data-zh="获客" data-en="Lead Gen">获客</span><span data-zh="CRM承接" data-en="CRM Handoff">CRM承接</span></div>
+      </article>
+    </div>
+  </section>
+  <section class="section aqua-soft">
+    <div class="container">
+      <div class="section-head"><p class="kicker dark" data-zh="CONTENT" data-en="CONTENT">CONTENT</p><h2 data-zh="我的自媒体内容" data-en="My Content Work">我的自媒体内容</h2></div>
+      <div class="video-grid">
+        <a class="video-card" href="https://weixin.qq.com/sph/AsgGUVfZTP" target="_blank" rel="noopener"><img src="./assets/video-cover-01.jpg" alt="视频作品封面"><h3 data-zh="AI工具与内容实践" data-en="AI Tools and Content Practice">AI工具与内容实践</h3></a>
+        <a class="video-card" href="https://weixin.qq.com/sph/ABJMC9Ys1M" target="_blank" rel="noopener"><img src="./assets/video-cover-02.jpg" alt="视频作品封面"><h3 data-zh="AI工作流案例" data-en="AI Workflow Case">AI工作流案例</h3></a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-simple">
+    <div>
+      <img src="./assets/wordmark-white.svg" alt="May Lee" class="footer-wordmark">
+      <p data-zh="B端营销、客户体验与AI场景落地" data-en="B2B marketing, customer experience and AI workflow builder">B端营销、客户体验与AI场景落地</p>
+    </div>
+    <div class="footer-contact">
+      <p><a href="mailto:mei_lee@126.com">mei_lee@126.com</a></p>
+      <p data-zh="中国 · 广州" data-en="Guangzhou, China">中国 · 广州</p>
+    </div>
+  </div>
+  <div class="copyright">© 2026 May Lee. All rights reserved.</div>
+</footer>
+<script src="./js/main.js"></script>
 </body>
 </html>
