@@ -21,15 +21,6 @@
         }
         
         /* 全屏 Canvas 高性能流体层：移除了冲突的 mix-blend-mode，靠原生 RGBA 渲染 */
-        #fluid-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 9999;
-        }
 
         .nav-circle-container {
             position: relative;
@@ -58,7 +49,10 @@
 <body class="text-[#1A1A1A] antialiased selection:bg-gray-200">
 
     <!-- 电影级全屏物理流体画布 -->
-    <canvas id="fluid-canvas"></canvas>
+<div id="fluid-glow-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div id="glow-blob-blue" class="absolute w-[600px] h-[600px] rounded-full bg-blue-400/10 blur-[130px] will-change-transform"></div>
+        <div id="glow-blob-purple" class="absolute w-[450px] h-[450px] rounded-full bg-indigo-400/10 blur-[110px] will-change-transform"></div>
+    </div>
 
     <!-- 导航栏 -->
     <nav class="fixed top-0 left-0 right-0 bg-[#FCFCFC]/70 backdrop-blur-md z-50 border-b border-gray-100">
@@ -288,70 +282,42 @@
         /* ------------------------------------
          3. 高级物理阻尼 Canvas 流体引擎
         ------------------------------------ */
-        const canvas = document.getElementById('fluid-canvas');
-        const ctx = canvas.getContext('2d');
+/* ------------------------------------
+         3. 局部更新：全硬件加速·双生流体惯性引擎
+        ------------------------------------ */
+        const blobBlue = document.getElementById('glow-blob-blue');
+        const blobPurple = document.getElementById('glow-blob-purple');
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
 
-        const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        // 核心机密：双色光晕采用不同的阻尼系数（0.045 和 0.075）
+        // 移动时会拉伸出绝美的流体烟雾层次感，停下时自动回弹融合
+        let blueX = mouseX, blueY = mouseY;
+        let purpleX = mouseX, purpleY = mouseY;
+
         window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
 
-        // 28 级物理阻尼链条粒子（实现拉伸、回弹质感）
-        const numPoints = 28;
-        const points = [];
-        for (let i = 0; i < numPoints; i++) {
-            points.push({ x: mouse.x, y: mouse.y, radius: 45 * (1 - i / numPoints) });
-        }
+        function updateFluidGlow() {
+            // 物理阻尼公式
+            blueX += (mouseX - blueX) * 0.045;
+            blueY += (mouseY - blueY) * 0.045;
 
-        let time = 0;
+            purpleX += (mouseX - purpleX) * 0.075;
+            purpleY += (mouseY - purpleY) * 0.075;
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            time += 0.04;
+            // 使用 translate3d 强制开启 GPU 硬件加速，杜绝任何生硬与掉帧
+            blobBlue.style.transform = `translate3d(${blueX - 300}px, ${blueY - 300}px, 0)`;
+            blobPurple.style.transform = `translate3d(${purpleX - 225}px, ${purpleY - 225}px, 0)`;
 
-            points[0].x = mouse.x;
-            points[0].y = mouse.y;
-
-            for (let i = 1; i < numPoints; i++) {
-                const p0 = points[i - 1];
-                const p = points[i];
-                
-                // 核心缓动阻尼算法
-                p.x += (p0.x - p.x) * 0.35;
-                p.y += (p0.y - p.y) * 0.35;
-                
-                // 微弱的正弦扰动律动
-                p.x += Math.sin(time + i * 0.4) * 0.3;
-                p.y += Math.cos(time + i * 0.4) * 0.3;
-            }
-
-            for (let i = numPoints - 1; i >= 0; i--) {
-                const p = points[i];
-                const alpha = (1 - i / numPoints) * 0.22;
-                
-                const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 2);
-                gradient.addColorStop(0, `rgba(147, 197, 253, ${alpha * 1.5})`); // 浅蓝
-                gradient.addColorStop(0.5, `rgba(165, 180, 252, ${alpha * 0.4})`); // 浅靛蓝
-                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius * 2, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            requestAnimationFrame(animate);
+            requestAnimationFrame(updateFluidGlow);
         }
         
-        animate();
+        // 启动全新的流体引擎
+        updateFluidGlow();
     </script>
 </body>
 </html>
