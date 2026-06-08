@@ -17,7 +17,7 @@
             background-color: #FCFCFC;
         }
         
-        /* 【彻底修复流体】置于绝对顶层但穿透点击，确保可见 */
+        /* 鼠标跟随流体：强制最顶层并开启硬件加速 */
         #cursor-blob {
             position: fixed;
             top: 0;
@@ -26,11 +26,12 @@
             height: 450px;
             background: radial-gradient(circle, rgba(147, 197, 253, 0.45) 0%, rgba(165, 180, 252, 0.1) 50%, rgba(255, 255, 255, 0) 70%);
             border-radius: 50%;
-            pointer-events: none; /* 穿透点击，不影响网页正常交互 */
-            z-index: 9999;        /* 置于最顶层 */
+            pointer-events: none; /* 允许鼠标事件穿透 */
+            z-index: 9999;        /* 置于所有图层的最上方 */
             filter: blur(40px);
             will-change: transform;
             transform: translate3d(-999px, -999px, 0);
+            display: block !important; /* 避免被隐藏 */
         }
 
         /* 圆形导航基础架构 */
@@ -40,7 +41,7 @@
             height: 420px;
         }
         
-        /* 旋转动画 */
+        /* 圆圈旋转动画 */
         .rotating-text {
             position: absolute;
             width: 100%;
@@ -50,20 +51,6 @@
         @keyframes rotateCircle {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
-        }
-
-        /* 【彻底修复圆圈悬停】改用纯 CSS 控制，不需要 JS 参与 */
-        .circular-link {
-            cursor: pointer;
-            fill: #9CA3AF;
-            transition: fill 0.2s ease, font-weight 0.2s ease;
-        }
-        
-        /* 当鼠标悬停在整个大圆盘上时，让中间的文字改变 */
-        .nav-circle-container:hover #circle-center-text {
-            color: #1A1A1A !important;
-            letter-spacing: 0.25em !important;
-            content: "GO →";
         }
     </style>
 </head>
@@ -106,9 +93,12 @@
                     </div>
                 </div>
 
-                <div class="lg:col-span-5 flex justify-center items-center relative">
-                    <div class="nav-circle-container group">
-                        <div class="absolute inset-24 bg-gradient-to-tr from-blue-200/50 to-indigo-300/40 rounded-full blur-2xl"></div>
+                <div class="lg:col-span-5 flex justify-center items-center relative" style="z-index: 20;">
+                    <div class="nav-circle-container" 
+                         onmouseenter="document.getElementById('connect-text').style.display='none'; document.getElementById('go-text').style.display='inline'; document.getElementById('circle-center-text').style.transform='scale(1.1)';" 
+                         onmouseleave="document.getElementById('connect-text').style.display='inline'; document.getElementById('go-text').style.display='none'; document.getElementById('circle-center-text').style.transform='scale(1)';">
+                        
+                        <div class="absolute inset-24 bg-gradient-to-tr from-blue-200/50 to-indigo-300/40 rounded-full blur-2xl pointer-events-none"></div>
                         
                         <svg class="rotating-text" viewBox="0 0 500 500">
                             <defs>
@@ -116,22 +106,22 @@
                             </defs>
                             <text font-size="12" font-family="Inter" font-weight="400" letter-spacing="6">
                                 <textPath xlink:href="#circlePath">
-                                    <tspan class="circular-link hover:fill-black hover:font-bold" onclick="alert('ABOUT ME')">ABOUT ME • </tspan>
-                                    <tspan class="circular-link hover:fill-black hover:font-bold" onclick="alert('PROJECTS')">PROJECTS • </tspan>
-                                    <tspan class="circular-link hover:fill-black hover:font-bold" onclick="alert('AI BUILDER')">AI BUILDER • </tspan>
-                                    <tspan class="circular-link hover:fill-black hover:font-bold" onclick="alert('CONTACT')">CONTACT • </tspan>
-                                    <tspan class="circular-link hover:fill-black hover:font-bold" onclick="alert('ABOUT ME')">ABOUT ME • </tspan>
-                                    <tspan class="circular-link hover:fill-black hover:font-bold" onclick="alert('PROJECTS')">PROJECTS • </tspan>
-                                    <tspan class="circular-link hover:fill-black hover:font-bold" onclick="alert('AI BUILDER')">AI BUILDER • </tspan>
-                                    <tspan class="circular-link hover:fill-black hover:font-bold" onclick="alert('CONTACT')">CONTACT • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('ABOUT ME')">ABOUT ME • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('PROJECTS')">PROJECTS • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('AI BUILDER')">AI BUILDER • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('CONTACT')">CONTACT • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('ABOUT ME')">ABOUT ME • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('PROJECTS')">PROJECTS • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('AI BUILDER')">AI BUILDER • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:fill 0.2s, font-weight 0.2s;" onmouseenter="this.setAttribute('fill', '#1A1A1A'); this.style.fontWeight='600';" onmouseleave="this.setAttribute('fill', '#9CA3AF'); this.style.fontWeight='400';" onclick="alert('CONTACT')">CONTACT • </tspan>
                                 </textPath>
                             </text>
                         </svg>
 
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <span id="circle-center-text" class="text-xs font-semibold text-gray-400 tracking-widest transition-all duration-300 group-hover:text-gray-900 group-hover:scale-110">
-                                <span class="inline group-hover:hidden">CONNECT</span>
-                                <span class="hidden group-hover:inline text-blue-600">GO &rarr;</span>
+                            <span id="circle-center-text" class="text-xs font-semibold tracking-widest text-gray-400 transition-all duration-300" style="color: #9CA3AF;">
+                                <span id="connect-text" style="display: inline;">CONNECT</span>
+                                <span id="go-text" style="display: none; color: #3B82F6;">GO &rarr;</span>
                             </span>
                         </div>
                     </div>
@@ -195,7 +185,7 @@
     </main>
 
     <script>
-        // 1. 打字机动态效果（不受任何层级影响）
+        // 1. 打字机动态效果
         var typed = new Typed('#typed-slogan', {
             strings: [
                 '更懂用户，才能把增长跑出来',
@@ -210,16 +200,16 @@
             cursorChar: ' |'
         });
 
-        // 2. 强力修复版：鼠标流体精准追踪逻辑
+        // 2. 强力修复版：监听窗口级别的鼠标移动
         const blob = document.getElementById('cursor-blob');
         
-        // 只有当鼠标在窗口内移动时才激活，使用性能最优的 transform3d
         window.addEventListener('mousemove', (e) => {
-            // 减去 225 是为了让 450px 宽度的圆心精准重合在鼠标指针上
-            const left = e.clientX - 225;
-            const top = e.clientY - 225;
+            // 计算视口绝对坐标，并减去圆半径(225px)使其居中
+            const x = e.clientX - 225;
+            const y = e.clientY - 225;
             
-            blob.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+            // 使用最高性能的 translate3d 绕过文档流重绘
+            blob.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         });
     </script>
 </body>
