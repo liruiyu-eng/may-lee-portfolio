@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>更懂用户，才能把增长跑出来 | May 个人主页</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- 换回绝对稳定的 Tailwind CSS v3 CDN，拒绝任何加载错误 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入打字机效果库 -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <!-- Google Fonts 提升质感 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -16,7 +20,7 @@
             background-color: #FCFCFC;
         }
         
-        /* 强制全屏 Canvas 置顶穿透 */
+        /* 全屏 Canvas 高性能流体层：移除了冲突的 mix-blend-mode，靠原生 RGBA 渲染 */
         #fluid-canvas {
             position: fixed;
             top: 0;
@@ -25,7 +29,6 @@
             height: 100vh;
             pointer-events: none;
             z-index: 9999;
-            mix-blend-mode: multiply; /* 让蓝紫色流体完美融合在白底上 */
         }
 
         .nav-circle-container {
@@ -34,7 +37,7 @@
             height: 440px;
         }
         
-        /* 圆圈自转动画：极其丝滑平稳 */
+        /* 圆圈顺滑自转 */
         .rotating-text {
             position: absolute;
             width: 100%;
@@ -47,7 +50,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* 手写体特殊样式 */
         .handwritten-font {
             font-family: 'Ma Shan Zheng', cursive, sans-serif;
         }
@@ -55,8 +57,10 @@
 </head>
 <body class="text-[#1A1A1A] antialiased selection:bg-gray-200">
 
+    <!-- 电影级全屏物理流体画布 -->
     <canvas id="fluid-canvas"></canvas>
 
+    <!-- 导航栏 -->
     <nav class="fixed top-0 left-0 right-0 bg-[#FCFCFC]/70 backdrop-blur-md z-50 border-b border-gray-100">
         <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="text-lg font-medium tracking-tight hover:opacity-70 transition-opacity">May .</a>
@@ -69,36 +73,44 @@
         </div>
     </nav>
 
+    <!-- 主体内容 -->
     <main class="pt-20 relative z-10">
         
+        <!-- 首页首屏 -->
         <section class="max-w-6xl mx-auto px-6 pt-12 pb-24 md:pt-20 md:pb-32 min-h-[90vh] flex items-center">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
                 
+                <!-- 左侧：硬核打字机文案区（已完美修复容器） -->
                 <div class="lg:col-span-7 space-y-6 md:space-y-8">
                     <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">
                         用户驱动 · 体验为本 · 增长可见
                     </span>
-                    <h1 class="text-4xl md:text-6xl font-light tracking-tight text-gray-900 leading-tight">
-                        更懂用户，<br><span class="font-medium text-blue-600">才能把增长跑出来</span>
+                    <h1 class="text-4xl md:text-6xl font-light tracking-tight text-gray-900 leading-tight min-h-[160px]">
+                        更懂用户，<br>
+                        <span id="typed-slogan" class="font-medium text-blue-600"></span>
                     </h1>
-                    <p class="text-lg md:text-xl text-gray-500 font-light max-w-xl leading-relaxed">
+                    <p class="text-lg md:text-xl text-gray-400 font-light max-w-xl leading-relaxed">
                         帮企业把用户洞察，变成看得见的增长。
                     </p>
                     <div class="pt-4">
                         <a href="#" class="inline-flex items-center justify-center px-8 py-3.5 bg-[#1A1A1A] text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors shadow-sm">
-                            联系我
+                            联系我聊聊 →
                         </a>
                     </div>
                 </div>
 
+                <!-- 右侧：灵动交互文本圆环区 -->
                 <div class="lg:col-span-5 flex flex-col justify-center items-center relative">
                     <div class="nav-circle-container">
-                        <div class="absolute inset-24 bg-gradient-to-tr from-blue-200/40 to-indigo-300/40 rounded-full blur-3xl pointer-events-none"></div>
+                        <!-- 中心的柔和融合霓虹光晕 -->
+                        <div class="absolute inset-24 bg-gradient-to-tr from-blue-200/30 to-indigo-300/30 rounded-full blur-3xl pointer-events-none"></div>
                         
+                        <!-- 个人形象照占位区域 -->
                         <div class="absolute inset-28 rounded-full border border-gray-100 bg-white shadow-sm flex items-center justify-center overflow-hidden pointer-events-none z-0">
                             <div class="text-gray-300 font-light text-xs tracking-wider">MAY LEE</div>
                         </div>
 
+                        <!-- SVG 动态交互旋转文字圆环 -->
                         <svg class="rotating-text z-10 relative" viewBox="0 0 500 500">
                             <defs>
                                 <path id="circlePath" d="M 250, 250 m -165, 0 a 165,165 0 1,1 330,0 a 165,165 0 1,1 -330,0" />
@@ -117,6 +129,7 @@
                             </text>
                         </svg>
 
+                        <!-- 圆心动态文字容器 -->
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
                             <span id="circle-center-text" class="text-[11px] font-semibold tracking-widest text-gray-400 uppercase transition-all duration-300 bg-[#FCFCFC]/80 px-2 py-1 rounded">
                                 CONNECT
@@ -124,6 +137,7 @@
                         </div>
                     </div>
                     
+                    <!-- 手写体 -->
                     <div class="mt-6 text-xl text-gray-400 handwritten-font tracking-wide text-center">
                         连接业务、用户与增长
                     </div>
@@ -132,6 +146,7 @@
             </div>
         </section>
 
+        <!-- 关于我 & 数字墙 -->
         <div id="about" class="bg-white border-t border-b border-gray-50 py-20 md:py-28 relative z-20">
             <div class="max-w-6xl mx-auto px-6">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
@@ -142,4 +157,201 @@
                     </div>
                     <div class="lg:col-span-5 grid grid-cols-3 gap-4 pt-4 lg:pt-10">
                         <div class="space-y-1">
-                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">
+                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">10<span class="text-xl font-normal text-gray-400">年</span></div>
+                            <div class="text-xs font-medium text-gray-400 tracking-wider">行业经验</div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">7<span class="text-xl font-normal text-gray-400">年</span></div>
+                            <div class="text-xs font-medium text-gray-400 tracking-wider">用户研究</div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">3<span class="text-xl font-normal text-gray-400">年</span></div>
+                            <div class="text-xs font-medium text-gray-400 tracking-wider">市场营销</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心能力卡片 -->
+        <section class="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-20">
+            <div class="space-y-12">
+                <div class="space-y-2">
+                    <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">EXPERTISE</span>
+                    <h2 class="text-3xl font-medium tracking-tight text-gray-900">核心能力</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                    <div class="space-y-4 group">
+                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#1A1A1A] group-hover:text-white transition-all duration-300">01</div>
+                        <h3 class="text-xl font-medium text-gray-900">用户研究</h3>
+                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">洞察用户需求与决策路径，为产品与策略提供依据。</p>
+                    </div>
+                    <div class="space-y-4 group">
+                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#1A1A1A] group-hover:text-white transition-all duration-300">02</div>
+                        <h3 class="text-xl font-medium text-gray-900">体验管理</h3>
+                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">设计端到端的客户触点与旅程，提升满意度与转化。</p>
+                    </div>
+                    <div class="space-y-4 group">
+                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#1A1A1A] group-hover:text-white transition-all duration-300">03</div>
+                        <h3 class="text-xl font-medium text-gray-900">B2B营销增长</h3>
+                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">从内容策略到线索转化，构建可持续的增长路径。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 客户/同事评价 -->
+        <section class="bg-gray-50 border-t border-b border-gray-100 py-20 md:py-28 relative z-20">
+            <div class="max-w-6xl mx-auto px-6 space-y-12">
+                <div class="space-y-2">
+                    <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">TESTIMONIALS</span>
+                    <h2 class="text-3xl font-medium tracking-tight text-gray-900">客户/同事评价</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
+                        <p class="text-gray-600 font-light leading-relaxed italic">“我给她2个月就转正了，因为她是那种，你交代下去就不用担心的人，不让人操心，会直接拿结果回来”</p>
+                        <div class="mt-6 text-xs font-medium text-gray-400">— 前直属上级，某科技企业运营总监</div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
+                        <p class="text-gray-600 font-light leading-relaxed italic">“你帮我把原本散点的思路重新梳理了，镜头前我第一次觉得自己说得清楚、说得顺……在你的专业引导下，我能讲得这么好，越讲越自信、越讲越不紧张。”</p>
+                        <div class="mt-6 text-xs font-medium text-gray-400">— 某科技企业负责人，标杆案例拍摄项目</div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
+                        <p class="text-gray-600 font-light leading-relaxed italic">“我们自己以前也经常尝试自己部门亲自做调研，说实话，挖出来的东西不够真正有价值。找用户研究团队May介入之后，发现的问题直接影响了产品方向。”</p>
+                        <div class="mt-6 text-xs font-medium text-gray-400">— 前业务/产品同事，用户研究项目</div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
+                        <p class="text-gray-600 font-light leading-relaxed italic">“跟了梅姐一年，学到最多的不是技术，是怎么跟客户、跨团队、外部伙伴真正把事情推动起来。”</p>
+                        <div class="mt-6 text-xs font-medium text-gray-400">— 前团队成员</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 专业资质 -->
+        <section class="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-4 space-y-2">
+                    <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">CREDENTIALS</span>
+                    <h2 class="text-3xl font-medium tracking-tight text-gray-900">专业资质</h2>
+                </div>
+                <div class="lg:col-span-8 flex flex-wrap gap-3">
+                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">PMP项目管理认证</span>
+                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">Six Sigma Green Belt</span>
+                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">工信部中级用户研究工程师</span>
+                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">工信部中级大数据分析师认证</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 动效核心脚本（已彻底修复崩溃阻断） -->
+    <script>
+        /* ------------------------------------
+         1. 打字机效果初始化
+        ------------------------------------ */
+        var typed = new Typed('#typed-slogan', {
+            strings: [
+                '才能把增长跑出来。',
+                '10年用户体验与市场营销专家。',
+                '帮企业把洞察变成可见的增长。'
+            ],
+            typeSpeed: 60,
+            backSpeed: 35,
+            backDelay: 2500,
+            loop: true,
+            cursorChar: ' |'
+        });
+
+        /* ------------------------------------
+         2. 圆环悬停动态交互逻辑
+        ------------------------------------ */
+        const centerText = document.getElementById('circle-center-text');
+
+        function handleRingHover(element, text) {
+            element.setAttribute('fill', '#1A1A1A');
+            element.style.fontWeight = '600';
+            centerText.innerText = text;
+            centerText.style.color = '#2563EB'; // 悬停高亮变蓝
+            centerText.style.transform = 'scale(1.12)';
+        }
+
+        function handleRingLeave(element) {
+            element.setAttribute('fill', '#9CA3AF');
+            element.style.fontWeight = '300';
+            centerText.innerText = 'CONNECT';
+            centerText.style.color = '#9CA3AF';
+            centerText.style.transform = 'scale(1)';
+        }
+
+        /* ------------------------------------
+         3. 高级物理阻尼 Canvas 流体引擎
+        ------------------------------------ */
+        const canvas = document.getElementById('fluid-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        // 28 级物理阻尼链条粒子（实现拉伸、回弹质感）
+        const numPoints = 28;
+        const points = [];
+        for (let i = 0; i < numPoints; i++) {
+            points.push({ x: mouse.x, y: mouse.y, radius: 45 * (1 - i / numPoints) });
+        }
+
+        let time = 0;
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            time += 0.04;
+
+            points[0].x = mouse.x;
+            points[0].y = mouse.y;
+
+            for (let i = 1; i < numPoints; i++) {
+                const p0 = points[i - 1];
+                const p = points[i];
+                
+                // 核心缓动阻尼算法
+                p.x += (p0.x - p.x) * 0.35;
+                p.y += (p0.y - p.y) * 0.35;
+                
+                // 微弱的正弦扰动律动
+                p.x += Math.sin(time + i * 0.4) * 0.3;
+                p.y += Math.cos(time + i * 0.4) * 0.3;
+            }
+
+            for (let i = numPoints - 1; i >= 0; i--) {
+                const p = points[i];
+                const alpha = (1 - i / numPoints) * 0.22;
+                
+                const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 2);
+                gradient.addColorStop(0, `rgba(147, 197, 253, ${alpha * 1.5})`); // 浅蓝
+                gradient.addColorStop(0.5, `rgba(165, 180, 252, ${alpha * 0.4})`); // 浅靛蓝
+                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius * 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+    </script>
+</body>
+</html>
