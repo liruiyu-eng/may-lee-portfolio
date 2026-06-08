@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>更懂用户，才能把增长跑出来 | May 个人主页</title>
-    <!-- 换回绝对稳定的 Tailwind CSS v3 CDN，拒绝任何加载错误 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入打字机效果库 -->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <!-- Google Fonts 提升质感 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
@@ -19,8 +16,6 @@
             overflow-x: hidden;
             background-color: #FCFCFC;
         }
-        
-        /* 全屏 Canvas 高性能流体层：移除了冲突的 mix-blend-mode，靠原生 RGBA 渲染 */
 
         .nav-circle-container {
             position: relative;
@@ -48,13 +43,8 @@
 </head>
 <body class="text-[#1A1A1A] antialiased selection:bg-gray-200">
 
-    <!-- 电影级全屏物理流体画布 -->
-<div id="fluid-glow-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div id="glow-blob-blue" class="absolute w-[600px] h-[600px] rounded-full bg-blue-400/10 blur-[130px] will-change-transform"></div>
-        <div id="glow-blob-purple" class="absolute w-[450px] h-[450px] rounded-full bg-indigo-400/10 blur-[110px] will-change-transform"></div>
-    </div>
+    <canvas id="fluid-canvas" class="fixed inset-0 pointer-events-none z-40"></canvas>
 
-    <!-- 导航栏 -->
     <nav class="fixed top-0 left-0 right-0 bg-[#FCFCFC]/70 backdrop-blur-md z-50 border-b border-gray-100">
         <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="text-lg font-medium tracking-tight hover:opacity-70 transition-opacity">May .</a>
@@ -67,21 +57,18 @@
         </div>
     </nav>
 
-    <!-- 主体内容 -->
     <main class="pt-20 relative z-10">
         
-        <!-- 首页首屏 -->
         <section class="max-w-6xl mx-auto px-6 pt-12 pb-24 md:pt-20 md:pb-32 min-h-[90vh] flex items-center">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
                 
-                <!-- 左侧：硬核打字机文案区（已完美修复容器） -->
                 <div class="lg:col-span-7 space-y-6 md:space-y-8">
                     <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">
                         用户驱动 · 体验为本 · 增长可见
                     </span>
                     <h1 class="text-4xl md:text-6xl font-light tracking-tight text-gray-900 leading-tight min-h-[160px]">
                         更懂用户，<br>
-                        <span id="typed-slogan" class="font-medium text-blue-600"></span>
+                        <span id="typed-slogan" class="font-medium text-[#002FA7]"></span>
                     </h1>
                     <p class="text-lg md:text-xl text-gray-400 font-light max-w-xl leading-relaxed">
                         帮企业把用户洞察，变成看得见的增长。
@@ -93,385 +80,14 @@
                     </div>
                 </div>
 
-                <!-- 右侧：灵动交互文本圆环区 -->
                 <div class="lg:col-span-5 flex flex-col justify-center items-center relative">
                     <div class="nav-circle-container">
-                        <!-- 中心的柔和融合霓虹光晕 -->
-                        <div class="absolute inset-24 bg-gradient-to-tr from-blue-200/30 to-indigo-300/30 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="absolute inset-24 bg-gradient-to-tr from-blue-600/10 to-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
                         
-                        <!-- 个人形象照占位区域 -->
                         <div class="absolute inset-28 rounded-full border border-gray-100 bg-white shadow-sm flex items-center justify-center overflow-hidden pointer-events-none z-0">
                             <div class="text-gray-300 font-light text-xs tracking-wider">MAY LEE</div>
                         </div>
 
-                        <!-- SVG 动态交互旋转文字圆环 -->
                         <svg class="rotating-text z-10 relative" viewBox="0 0 500 500">
                             <defs>
-                                <path id="circlePath" d="M 250, 250 m -165, 0 a 165,165 0 1,1 330,0 a 165,165 0 1,1 -330,0" />
-                            </defs>
-                            <text font-size="10" font-family="Inter" font-weight="300" letter-spacing="8">
-                                <textPath xlink:href="#circlePath">
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'ABOUT ME')" onmouseleave="handleRingLeave(this)">ABOUT ME • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'PROJECTS')" onmouseleave="handleRingLeave(this)">PROJECTS • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'AI BUILDER')" onmouseleave="handleRingLeave(this)">AI BUILDER • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'CONTACT')" onmouseleave="handleRingLeave(this)">CONTACT • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'ABOUT ME')" onmouseleave="handleRingLeave(this)">ABOUT ME • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'PROJECTS')" onmouseleave="handleRingLeave(this)">PROJECTS • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'AI BUILDER')" onmouseleave="handleRingLeave(this)">AI BUILDER • </tspan>
-                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this, 'CONTACT')" onmouseleave="handleRingLeave(this)">CONTACT • </tspan>
-                                </textPath>
-                            </text>
-                        </svg>
-
-                        <!-- 圆心动态文字容器 -->
-                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-                            <span id="circle-center-text" class="text-[11px] font-semibold tracking-widest text-gray-400 uppercase transition-all duration-300 bg-[#FCFCFC]/80 px-2 py-1 rounded">
-                                CONNECT
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <!-- 手写体 -->
-                    <div class="mt-6 text-xl text-gray-400 handwritten-font tracking-wide text-center">
-                        连接业务、用户与增长
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 关于我 & 数字墙 -->
-        <div id="about" class="bg-white border-t border-b border-gray-50 py-20 md:py-28 relative z-20">
-            <div class="max-w-6xl mx-auto px-6">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
-                    <div class="lg:col-span-7 space-y-6">
-                        <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">ABOUT ME</span>
-                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-gray-900">深耕科技行业的增长探索者</h2>
-                        <p class="text-base md:text-lg text-gray-500 font-light leading-relaxed">10年用户体验与市场营销经验，深耕科技行业。擅长理解复杂业务与产品，将其转化为清晰的价值主张与可执行的增长路径。</p>
-                    </div>
-                    <div class="lg:col-span-5 grid grid-cols-3 gap-4 pt-4 lg:pt-10">
-                        <div class="space-y-1">
-                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">10<span class="text-xl font-normal text-gray-400">年</span></div>
-                            <div class="text-xs font-medium text-gray-400 tracking-wider">行业经验</div>
-                        </div>
-                        <div class="space-y-1">
-                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">7<span class="text-xl font-normal text-gray-400">年</span></div>
-                            <div class="text-xs font-medium text-gray-400 tracking-wider">用户研究</div>
-                        </div>
-                        <div class="space-y-1">
-                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">3<span class="text-xl font-normal text-gray-400">年</span></div>
-                            <div class="text-xs font-medium text-gray-400 tracking-wider">市场营销</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 核心能力卡片 -->
-        <section class="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-20">
-            <div class="space-y-12">
-                <div class="space-y-2">
-                    <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">EXPERTISE</span>
-                    <h2 class="text-3xl font-medium tracking-tight text-gray-900">核心能力</h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                    <div class="space-y-4 group">
-                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#1A1A1A] group-hover:text-white transition-all duration-300">01</div>
-                        <h3 class="text-xl font-medium text-gray-900">用户研究</h3>
-                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">洞察用户需求与决策路径，为产品与策略提供依据。</p>
-                    </div>
-                    <div class="space-y-4 group">
-                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#1A1A1A] group-hover:text-white transition-all duration-300">02</div>
-                        <h3 class="text-xl font-medium text-gray-900">体验管理</h3>
-                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">设计端到端的客户触点与旅程，提升满意度与转化。</p>
-                    </div>
-                    <div class="space-y-4 group">
-                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#1A1A1A] group-hover:text-white transition-all duration-300">03</div>
-                        <h3 class="text-xl font-medium text-gray-900">B2B营销增长</h3>
-                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">从内容策略到线索转化，构建可持续的增长路径。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 客户/同事评价 -->
-        <section class="bg-gray-50 border-t border-b border-gray-100 py-20 md:py-28 relative z-20">
-            <div class="max-w-6xl mx-auto px-6 space-y-12">
-                <div class="space-y-2">
-                    <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">TESTIMONIALS</span>
-                    <h2 class="text-3xl font-medium tracking-tight text-gray-900">客户/同事评价</h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
-                        <p class="text-gray-600 font-light leading-relaxed italic">“我给她2个月就转正了，因为她是那种，你交代下去就不用担心的人，不让人操心，会直接拿结果回来”</p>
-                        <div class="mt-6 text-xs font-medium text-gray-400">— 前直属上级，某科技企业运营总监</div>
-                    </div>
-                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
-                        <p class="text-gray-600 font-light leading-relaxed italic">“你帮我把原本散点的思路重新梳理了，镜头前我第一次觉得自己说得清楚、说得顺……在你的专业引导下，我能讲得这么好，越讲越自信、越讲越不紧张。”</p>
-                        <div class="mt-6 text-xs font-medium text-gray-400">— 某科技企业负责人，标杆案例拍摄项目</div>
-                    </div>
-                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
-                        <p class="text-gray-600 font-light leading-relaxed italic">“我们自己以前也经常尝试自己部门亲自做调研，说实话，挖出来的东西不够真正有价值。找用户研究团队May介入之后，发现的问题直接影响了产品方向。”</p>
-                        <div class="mt-6 text-xs font-medium text-gray-400">— 前业务/产品同事，用户研究项目</div>
-                    </div>
-                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
-                        <p class="text-gray-600 font-light leading-relaxed italic">“跟了梅姐一年，学到最多的不是技术，是怎么跟客户、跨团队、外部伙伴真正把事情推动起来。”</p>
-                        <div class="mt-6 text-xs font-medium text-gray-400">— 前团队成员</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 专业资质 -->
-        <section class="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-4 space-y-2">
-                    <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">CREDENTIALS</span>
-                    <h2 class="text-3xl font-medium tracking-tight text-gray-900">专业资质</h2>
-                </div>
-                <div class="lg:col-span-8 flex flex-wrap gap-3">
-                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">PMP项目管理认证</span>
-                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">Six Sigma Green Belt</span>
-                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">工信部中级用户研究工程师</span>
-                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">工信部中级大数据分析师认证</span>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- 动效核心脚本（已彻底修复崩溃阻断） -->
-    <script>
-        /* ------------------------------------
-         1. 打字机效果初始化
-        ------------------------------------ */
-        var typed = new Typed('#typed-slogan', {
-            strings: [
-                '才能把增长跑出来。',
-                '10年用户体验与市场营销专家。',
-                '帮企业把洞察变成可见的增长。'
-            ],
-            typeSpeed: 60,
-            backSpeed: 35,
-            backDelay: 2500,
-            loop: true,
-            cursorChar: ' |'
-        });
-
-        /* ------------------------------------
-         2. 圆环悬停动态交互逻辑
-        ------------------------------------ */
-        const centerText = document.getElementById('circle-center-text');
-
-        function handleRingHover(element, text) {
-            element.setAttribute('fill', '#1A1A1A');
-            element.style.fontWeight = '600';
-            centerText.innerText = text;
-            centerText.style.color = '#2563EB'; // 悬停高亮变蓝
-            centerText.style.transform = 'scale(1.12)';
-        }
-
-        function handleRingLeave(element) {
-            element.setAttribute('fill', '#9CA3AF');
-            element.style.fontWeight = '300';
-            centerText.innerText = 'CONNECT';
-            centerText.style.color = '#9CA3AF';
-            centerText.style.transform = 'scale(1)';
-        }
-
-        /* ------------------------------------
-         3. 高级物理阻尼 Canvas 流体引擎
-        ------------------------------------ */
-/* ------------------------------------
-         3. 局部更新：全硬件加速·双生流体惯性引擎
-        ------------------------------------ */
-        const blobBlue = document.getElementById('glow-blob-blue');
-        const blobPurple = document.getElementById('glow-blob-purple');
-
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-
-        // 核心机密：双色光晕采用不同的阻尼系数（0.045 和 0.075）
-        // 移动时会拉伸出绝美的流体烟雾层次感，停下时自动回弹融合
-        let blueX = mouseX, blueY = mouseY;
-        let purpleX = mouseX, purpleY = mouseY;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function updateFluidGlow() {
-            // 物理阻尼公式
-            blueX += (mouseX - blueX) * 0.045;
-            blueY += (mouseY - blueY) * 0.045;
-
-            purpleX += (mouseX - purpleX) * 0.075;
-            purpleY += (mouseY - purpleY) * 0.075;
-
-            // 使用 translate3d 强制开启 GPU 硬件加速，杜绝任何生硬与掉帧
-            blobBlue.style.transform = `translate3d(${blueX - 300}px, ${blueY - 300}px, 0)`;
-            blobPurple.style.transform = `translate3d(${purpleX - 225}px, ${purpleY - 225}px, 0)`;
-
-            requestAnimationFrame(updateFluidGlow);
-        }
-        
-        // 启动全新的流体引擎
-        updateFluidGlow();
-                /* ------------------------------------
-         4. 蓝色墨水鼠标拖尾
-        ------------------------------------ */
-        (() => {
-            const canvas = document.getElementById('fluid-cursor');
-            const ctx = canvas.getContext('2d');
-
-            let width = window.innerWidth;
-            let height = window.innerHeight;
-            let dpr = window.devicePixelRatio || 1;
-
-            let cursor = {
-                x: width / 2,
-                y: height / 2,
-                px: width / 2,
-                py: height / 2,
-                active: false,
-                hover: false
-            };
-
-            const particles = [];
-
-            function resizeCursorCanvas() {
-                width = window.innerWidth;
-                height = window.innerHeight;
-                dpr = window.devicePixelRatio || 1;
-
-                canvas.width = width * dpr;
-                canvas.height = height * dpr;
-                canvas.style.width = width + 'px';
-                canvas.style.height = height + 'px';
-
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            }
-
-            function addCursorParticle(x, y, vx, vy) {
-                const speed = Math.hypot(vx, vy);
-                const count = Math.min(5, Math.max(1, Math.floor(speed / 14)));
-
-                for (let i = 0; i < count; i++) {
-                    particles.push({
-                        x: x + (Math.random() - 0.5) * 10,
-                        y: y + (Math.random() - 0.5) * 10,
-                        vx: -vx * 0.018 + (Math.random() - 0.5) * 1.4,
-                        vy: -vy * 0.018 + (Math.random() - 0.5) * 1.4,
-                        r: cursor.hover
-                            ? 24 + Math.random() * 20
-                            : 14 + Math.random() * 22,
-                        life: 1,
-                        decay: 0.018 + Math.random() * 0.018,
-                        blur: 10 + Math.random() * 18
-                    });
-                }
-            }
-
-            function drawCursorParticle(p) {
-                const gradient = ctx.createRadialGradient(
-                    p.x,
-                    p.y,
-                    0,
-                    p.x,
-                    p.y,
-                    p.r
-                );
-
-                gradient.addColorStop(0, `rgba(37, 99, 235, ${0.42 * p.life})`);
-                gradient.addColorStop(0.45, `rgba(59, 130, 246, ${0.22 * p.life})`);
-                gradient.addColorStop(1, `rgba(59, 130, 246, 0)`);
-
-                ctx.save();
-                ctx.filter = `blur(${p.blur}px)`;
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            }
-
-            function drawCursorDot() {
-                if (!cursor.active) return;
-
-                ctx.save();
-
-                ctx.filter = 'blur(0.8px)';
-                ctx.fillStyle = cursor.hover
-                    ? 'rgba(37, 99, 235, 0.95)'
-                    : 'rgba(37, 99, 235, 0.85)';
-
-                ctx.beginPath();
-                ctx.arc(cursor.x, cursor.y, cursor.hover ? 6 : 4, 0, Math.PI * 2);
-                ctx.fill();
-
-                ctx.strokeStyle = 'rgba(37, 99, 235, 0.22)';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.arc(cursor.x, cursor.y, cursor.hover ? 26 : 18, 0, Math.PI * 2);
-                ctx.stroke();
-
-                ctx.restore();
-            }
-
-            function animateCursorTrail() {
-                ctx.clearRect(0, 0, width, height);
-
-                for (let i = particles.length - 1; i >= 0; i--) {
-                    const p = particles[i];
-
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.vx *= 0.985;
-                    p.vy *= 0.985;
-                    p.r *= 1.012;
-                    p.life -= p.decay;
-
-                    if (p.life <= 0) {
-                        particles.splice(i, 1);
-                    } else {
-                        drawCursorParticle(p);
-                    }
-                }
-
-                drawCursorDot();
-                requestAnimationFrame(animateCursorTrail);
-            }
-
-            window.addEventListener('mousemove', (e) => {
-                cursor.active = true;
-
-                cursor.px = cursor.x;
-                cursor.py = cursor.y;
-                cursor.x = e.clientX;
-                cursor.y = e.clientY;
-
-                const vx = cursor.x - cursor.px;
-                const vy = cursor.y - cursor.py;
-
-                addCursorParticle(cursor.x, cursor.y, vx, vy);
-            });
-
-            window.addEventListener('mouseover', (e) => {
-                cursor.hover = Boolean(
-                    e.target.closest('a, button, [role="button"], .cursor-hover')
-                );
-            });
-
-            window.addEventListener('mouseout', () => {
-                cursor.hover = false;
-            });
-
-            window.addEventListener('resize', resizeCursorCanvas);
-
-            resizeCursorCanvas();
-            animateCursorTrail();
-        })();
-    </script>
-</body>
-</html>
+                                <path id="circlePath" d="M 250, 250 m -165, 0 a 165,165 0
