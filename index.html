@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>更懂用户，才能把增长跑出来 | May 个人主页</title>
+    <!-- 绝对稳定的 Tailwind CSS v3 CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入打字机效果库 -->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <!-- Google Fonts 提升整体视觉质感 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
@@ -23,7 +26,7 @@
             height: 440px;
         }
         
-        /* 圆圈顺滑自转 */
+        /* 圆圈平滑自转动画 */
         .rotating-text {
             position: absolute;
             width: 100%;
@@ -43,8 +46,10 @@
 </head>
 <body class="text-[#1A1A1A] antialiased selection:bg-gray-200">
 
-    <canvas id="fluid-canvas" class="fixed inset-0 pointer-events-none z-40"></canvas>
+    <!-- 全屏高阶 SplashCursor 流体画布层 (铺在最底层，绝不阻挡文字点击与悬停) -->
+    <canvas id="fluid-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
+    <!-- 导航栏 -->
     <nav class="fixed top-0 left-0 right-0 bg-[#FCFCFC]/70 backdrop-blur-md z-50 border-b border-gray-100">
         <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="text-lg font-medium tracking-tight hover:opacity-70 transition-opacity">May .</a>
@@ -57,12 +62,15 @@
         </div>
     </nav>
 
+    <!-- 主体内容 -->
     <main class="pt-20 relative z-10">
         
+        <!-- 首页首屏 -->
         <section class="max-w-6xl mx-auto px-6 pt-12 pb-24 md:pt-20 md:pb-32 min-h-[90vh] flex items-center">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
                 
-                <div class="lg:col-span-7 space-y-6 md:space-y-8">
+                <!-- 左侧：硬核打字机文案区 -->
+                <div class="lg:col-span-7 space-y-6 md:space-y-8 z-20">
                     <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">
                         用户驱动 · 体验为本 · 增长可见
                     </span>
@@ -80,14 +88,338 @@
                     </div>
                 </div>
 
-                <div class="lg:col-span-5 flex flex-col justify-center items-center relative">
+                <!-- 右侧：高级灵动交互文本圆环区 -->
+                <div class="lg:col-span-5 flex flex-col justify-center items-center relative z-20">
                     <div class="nav-circle-container">
+                        <!-- 中心的柔和融合克莱因蓝微光晕 -->
                         <div class="absolute inset-24 bg-gradient-to-tr from-blue-600/10 to-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
                         
+                        <!-- 个人形象照占位区域 -->
                         <div class="absolute inset-28 rounded-full border border-gray-100 bg-white shadow-sm flex items-center justify-center overflow-hidden pointer-events-none z-0">
                             <div class="text-gray-300 font-light text-xs tracking-wider">MAY LEE</div>
                         </div>
 
+                        <!-- SVG 动态交互旋转文字圆环 -->
                         <svg class="rotating-text z-10 relative" viewBox="0 0 500 500">
                             <defs>
-                                <path id="circlePath" d="M 250, 250 m -165, 0 a 165,165 0
+                                <path id="circlePath" d="M 250, 250 m -165, 0 a 165,165 0 1,1 330,0 a 165,165 0 1,1 -330,0" />
+                            </defs>
+                            <text font-size="10" font-family="Inter" font-weight="300" letter-spacing="8">
+                                <textPath xlink:href="#circlePath">
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this)" onmouseleave="handleRingLeave(this)">ABOUT ME • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this)" onmouseleave="handleRingLeave(this)">PROJECTS • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this)" onmouseleave="handleRingLeave(this)">AI BUILDER • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this)" onmouseleave="handleRingLeave(this)">CONTACT • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this)" onmouseleave="handleRingLeave(this)">ABOUT ME • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this)" onmouseleave="handleRingLeave(this)">PROJECTS • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this)" onmouseleave="handleRingLeave(this)">AI BUILDER • </tspan>
+                                    <tspan fill="#9CA3AF" style="cursor:pointer; transition:all 0.2s;" onmouseenter="handleRingHover(this)" onmouseleave="handleRingLeave(this)">CONTACT • </tspan>
+                                </textPath>
+                            </text>
+                        </svg>
+
+                        <!-- 圆心动态文字容器 -->
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                            <span id="circle-center-text" class="text-[11px] font-semibold tracking-widest text-gray-400 uppercase transition-all duration-300 bg-[#FCFCFC]/80 px-2 py-1 rounded">
+                                CONNECT
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- 手写体签名 -->
+                    <div class="mt-6 text-xl text-gray-400 handwritten-font tracking-wide text-center">
+                        连接业务、用户与增长
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 关于我 & 数字墙 -->
+        <div id="about" class="bg-white border-t border-b border-gray-50 py-20 md:py-28 relative z-20">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">ABOUT ME</span>
+                        <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-gray-900">深耕科技行业的增长探索者</h2>
+                        <p class="text-base md:text-lg text-gray-500 font-light leading-relaxed">10年用户体验与市场营销经验，深耕科技行业。擅长理解复杂业务与产品，将其转化为清晰的价值主张与可执行的增长路径。</p>
+                    </div>
+                    <div class="lg:col-span-5 grid grid-cols-3 gap-4 pt-4 lg:pt-10">
+                        <div class="space-y-1">
+                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">10<span class="text-xl font-normal text-gray-400">年</span></div>
+                            <div class="text-xs font-medium text-gray-400 tracking-wider">行业经验</div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">7<span class="text-xl font-normal text-gray-400">年</span></div>
+                            <div class="text-xs font-medium text-gray-400 tracking-wider">用户研究</div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">3<span class="text-xl font-normal text-gray-400">年</span></div>
+                            <div class="text-xs font-medium text-gray-400 tracking-wider">市场营销</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心能力卡片 -->
+        <section class="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-20">
+            <div class="space-y-12">
+                <div class="space-y-2">
+                    <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">EXPERTISE</span>
+                    <h2 class="text-3xl font-medium tracking-tight text-gray-900">核心能力</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                    <div class="space-y-4 group">
+                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#002FA7] group-hover:text-white transition-all duration-300">01</div>
+                        <h3 class="text-xl font-medium text-gray-900">用户研究</h3>
+                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">洞察用户需求与决策路径，为产品与策略提供依据。</p>
+                    </div>
+                    <div class="space-y-4 group">
+                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#002FA7] group-hover:text-white transition-all duration-300">02</div>
+                        <h3 class="text-xl font-medium text-gray-900">体验管理</h3>
+                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">设计端到端的客户触点与旅程，提升满意度与转化。</p>
+                    </div>
+                    <div class="space-y-4 group">
+                        <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-700 text-sm font-semibold border border-gray-100 group-hover:bg-[#002FA7] group-hover:text-white transition-all duration-300">03</div>
+                        <h3 class="text-xl font-medium text-gray-900">B2B营销增长</h3>
+                        <p class="text-sm md:text-base text-gray-500 font-light leading-relaxed">从内容策略到线索转化，构建可持续的增长路径。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 客户/同事评价 -->
+        <section class="bg-gray-50 border-t border-b border-gray-100 py-20 md:py-28 relative z-20">
+            <div class="max-w-6xl mx-auto px-6 space-y-12">
+                <div class="space-y-2">
+                    <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">TESTIMONIALS</span>
+                    <h2 class="text-3xl font-medium tracking-tight text-gray-900">客户/同事评价</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
+                        <p class="text-gray-600 font-light leading-relaxed italic">“我给她2个月就转正了，因为她是那种，你交代下去就不用担心的人，不让人操心，会直接拿结果回来”</p>
+                        <div class="mt-6 text-xs font-medium text-gray-400">— 前直属上级，某科技企业运营总监</div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
+                        <p class="text-gray-600 font-light leading-relaxed italic">“你帮我把原本散点的思路重新梳理了，镜头前我第一次觉得自己说得清楚、说得顺……在你的专业引导下，我能讲得这么好，越讲越自信、越讲越不紧张。”</p>
+                        <div class="mt-6 text-xs font-medium text-gray-400">— 某科技企业负责人，标杆案例拍摄项目</div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
+                        <p class="text-gray-600 font-light leading-relaxed italic">“我们自己以前也经常尝试自己部门亲自做调研，说实话，挖出来的东西不够真正有价值。找用户研究团队May介入之后，发现的问题直接影响了产品方向。”</p>
+                        <div class="mt-6 text-xs font-medium text-gray-400">— 前业务/产品同事，用户研究项目</div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
+                        <p class="text-gray-600 font-light leading-relaxed italic">“跟了梅姐一年，学到最多的不是技术，是怎么跟客户、跨团队、外部伙伴真正把事情推动起来。”</p>
+                        <div class="mt-6 text-xs font-medium text-gray-400">— 前团队成员</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 专业资质 -->
+        <section class="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-4 space-y-2">
+                    <span class="inline-block text-xs font-semibold tracking-widest text-gray-400 uppercase">CREDENTIALS</span>
+                    <h2 class="text-3xl font-medium tracking-tight text-gray-900">专业资质</h2>
+                </div>
+                <div class="lg:col-span-8 flex flex-wrap gap-3">
+                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">PMP项目管理认证</span>
+                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">Six Sigma Green Belt</span>
+                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">工信部中级用户研究工程师</span>
+                    <span class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm text-gray-600 font-light">工信部中级大数据分析师认证</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 动效核心脚本区域（自带熔断隔离机制） -->
+    <script>
+        /* ------------------------------------
+         1. 打字机效果初始化（隔离防御版）
+        ------------------------------------ */
+        try {
+            // 防御机制：如遇外部网络阻断导致类库加载失败，自动切为静态本底，绝不影响下方流体引擎
+            if (typeof Typed !== 'undefined') {
+                var typed = new Typed('#typed-slogan', {
+                    strings: [
+                        '才能把增长跑出来。',
+                        '10年用户体验与市场营销专家。',
+                        '帮企业把洞察变成可见的增长。'
+                    ],
+                    typeSpeed: 60,
+                    backSpeed: 35,
+                    backDelay: 2500,
+                    loop: true,
+                    cursorChar: ' |'
+                });
+            } else {
+                console.warn('Typed.js 未能加载，已切换至稳健模式。');
+                const sloganEl = document.getElementById('typed-slogan');
+                if (sloganEl) sloganEl.innerText = '才能把增长跑出来。';
+            }
+        } catch (e) {
+            console.error('打字机效果初始化跳过:', e);
+        }
+
+        /* ------------------------------------
+         2. 圆环悬停动态交互逻辑
+        ------------------------------------ */
+        const centerText = document.getElementById('circle-center-text');
+
+        function handleRingHover(element) {
+            element.setAttribute('fill', '#002FA7'); // 悬停文本同步变为克莱因蓝
+            element.style.fontWeight = '600';
+            if (centerText) {
+                centerText.innerText = 'GO →';
+                centerText.style.color = '#002FA7';      // 圆心反馈高亮变为克莱因蓝
+                centerText.style.transform = 'scale(1.12)';
+            }
+        }
+
+        function handleRingLeave(element) {
+            element.setAttribute('fill', '#9CA3AF');
+            element.style.fontWeight = '300';
+            if (centerText) {
+                centerText.innerText = 'CONNECT';
+                centerText.style.color = '#9CA3AF';
+                centerText.style.transform = 'scale(1)';
+            }
+        }
+
+        /* ------------------------------------
+         3. 克莱因蓝 SplashCursor 高阶流体动力学引擎
+        ------------------------------------ */
+        const canvas = document.getElementById('fluid-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            // 像素级映射对齐物理配置参数
+            const SIM_RES = 32;             // SIM_RESOLUTION={32}
+            const VEL_DISSIPATION = 0.5;    // VELOCITY_DISSIPATION={0.5}
+            const SPLAT_RADIUS = 0.08;      // SPLAT_RADIUS={0.08}
+            
+            const gridW = SIM_RES;
+            const gridH = Math.round(SIM_RES * (window.innerHeight / window.innerWidth)) || 32;
+            const velocityX = new Float32Array(gridW * gridH);
+            const velocityY = new Float32Array(gridW * gridH);
+
+            const particles = [];
+            const MAX_PARTICLES = 350;
+
+            let mouseX = 0, mouseY = 0, lastMouseX = 0, lastMouseY = 0;
+            let isMoving = false;
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isMoving) {
+                    lastMouseX = e.clientX;
+                    lastMouseY = e.clientY;
+                    isMoving = true;
+                }
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+                const dX = mouseX - lastMouseX;
+                const dY = mouseY - lastMouseY;
+                const speed = Math.sqrt(dX * dX + dY * dY);
+
+                if (speed > 1) {
+                    const gX = Math.floor((mouseX / window.innerWidth) * gridW);
+                    const gY = Math.floor((mouseY / window.innerHeight) * gridH);
+                    
+                    const radius = Math.max(2, Math.floor(SPLAT_RADIUS * gridW));
+                    for (let y = gY - radius; y <= gY + radius; y++) {
+                        for (let x = gX - radius; x <= gX + radius; x++) {
+                            if (x >= 0 && x < gridW && y >= 0 && y < gridH) {
+                                const idx = y * gridW + x;
+                                const dist = Math.sqrt((x - gX)**2 + (y - gY)**2);
+                                if (dist < radius) {
+                                    const force = (1.0 - dist / radius);
+                                    velocityX[idx] += dX * force * 0.45; 
+                                    velocityY[idx] += dY * force * 0.45;
+                                }
+                            }
+                        }
+                    }
+
+                    const pCount = Math.min(6, MAX_PARTICLES - particles.length);
+                    for (let i = 0; i < pCount; i++) {
+                        particles.push({
+                            x: mouseX + (Math.random() - 0.5) * 15,
+                            y: mouseY + (Math.random() - 0.5) * 15,
+                            vx: dX * 0.15 + (Math.random() - 0.5) * 1.5,
+                            vy: dY * 0.15 + (Math.random() - 0.5) * 1.5,
+                            alpha: 1.0,
+                            size: Math.random() * 30 + 25 
+                        });
+                    }
+                }
+
+                lastMouseX = mouseX;
+                lastMouseY = mouseY;
+            });
+
+            function animate() {
+                // 1. 速度场消散机制（严格执行 0.5 消散系数）
+                for (let i = 0; i < velocityX.length; i++) {
+                    velocityX[i] *= (1.0 - VEL_DISSIPATION * 0.15);
+                    velocityY[i] *= (1.0 - VEL_DISSIPATION * 0.15);
+                }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // 2. 粒子捕获流体矢量速度场进行有机的拉伸演散
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+
+                    const gX = Math.floor((p.x / window.innerWidth) * gridW);
+                    const gY = Math.floor((p.y / window.innerHeight) * gridH);
+
+                    if (gX >= 0 && gX < gridW && gY >= 0 && gY < gridH) {
+                        const idx = gY * gridW + gX;
+                        p.vx += velocityX[idx] * 0.06;
+                        p.vy += velocityY[idx] * 0.06;
+                    }
+
+                    p.vx *= 0.94;
+                    p.vy *= 0.94;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    
+                    p.alpha -= 0.015; 
+                    p.size += 0.5; 
+
+                    if (p.alpha <= 0) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+
+                    // 3. 渲染纯正克莱因蓝高阶液体浸润质感 (#002FA7)
+                    const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+                    gradient.addColorStop(0, `rgba(0, 47, 167, ${p.alpha * 0.16})`);   
+                    gradient.addColorStop(0.5, `rgba(0, 47, 167, ${p.alpha * 0.05})`); 
+                    gradient.addColorStop(1, 'rgba(0, 47, 167, 0)');
+
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+    </script>
+</body>
+</html>
